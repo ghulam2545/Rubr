@@ -1,47 +1,74 @@
 /**
- * to test in mobile browser
- * http://<Local IP Address>:<port number>
+ * Have a look in mobile device
+ *
+ * 1. Make sure your system and mobile phone are connected to same network (wifi)
+ * 2. Get your IP address by typing in cmd <ipconfig>
+ * 3. Now in your mobile browser type http://<IP address>:<port number>
  */
 
-// console.log("Hello World");
+// listen for tab
+const textbox = document.querySelector("textarea");
+textbox.addEventListener("keydown", (key) => {
+    if (key.keyCode === 9) {
+        key.preventDefault();
 
-// const Alert = (msg) => {
-//     alert(`Hey ${msg} dude, I'm not working right now. lol`);
-// };
+        textbox.setRangeText(
+            "    ",
+            textbox.selectionStart,
+            textbox.selectionStart,
+            "end"
+        );
+    }
+});
 
-// const lang = document.querySelector(".all-lang");
+const input = document.querySelector(".input-code");
+const output = document.querySelector(".output-code");
+const run_btn = document.querySelector(".run-btn");
+const http = new XMLHttpRequest();
 
-// lang.addEventListener("change", () => {
-//     Alert(lang.value);
-// });
+const starter = `#include <iostream>
+#include <vector>
+using namespace std;
 
-// textarea = document.querySelector("textarea");
-// textarea.addEventListener("input", autoResize, false);
+int main() {
+    // code here...
+    cout << "Hello from GCC " << __VERSION__ << "!";
 
-// function autoResize() {
-//     console.log(typeof this.style.height);
-//     this.style.maxHeight = "400px";
-//     this.style.maxHeight = this.scrollHeight + "px";
-//     // if (this.style.height >= "400") return;
-// }
+    return 0;
+}`;
 
-// const textarea = document.querySelector('textarea');
-// textarea.style.placeholder = "some placeholder";
+input.value = starter;
 
-// window.onload(() => {
-//     const textarea = document.querySelector("textarea");
-//     console.log(textarea);
-//     textarea.style.placeholder = "some placeholder";
-// });
+// runs code
+const RunCode = (srcCode) => {
+    http.open("POST", "http://coliru.stacked-crooked.com/compile", false);
+    http.send(
+        JSON.stringify({
+            cmd: "g++ -std=c++20 main.cpp && ./a.out",
+            src: srcCode,
+        })
+    );
 
-// const data = `int main() {
-//     cout << "name";
-//     return 0;
-// }`;
-// const func = () => {
-//     const res = document.querySelector("textarea");
-//     console.log(res);
-//     res.innerHTML = data;
-//     console.log("done");
-// };
-// func();
+    return http.response;
+};
+
+run_btn.addEventListener("click", () => {
+    const input_code = input.value;
+    output.value = RunCode(input_code);
+});
+
+// additional (working...)
+const Alert = (msg) => {
+    alert(
+        `Hello dear from ${msg}, Looks like I am not working right now for ${msg}, Please try to write some code in C++.`
+    );
+};
+
+const sel = document.querySelector(".all-lang");
+const lang = ["C", "Java", "Javascript", "Python"];
+sel.addEventListener("change", () => {
+    for (let i = 0; i < lang.length; ++i) {
+        if (sel.value == lang[i]) Alert(sel.value);
+    }
+    sel.value = "C++";
+});

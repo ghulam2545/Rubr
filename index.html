@@ -11,6 +11,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=PT+Mono&family=Roboto:wght@300&display=swap" rel="stylesheet">
 
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <title>Rubr</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -30,16 +35,19 @@
             </div>
             <div class="code-body">
                 <div class="textbox">
-                    <textarea placeholder="left side text box, I'm not responsive please fix me. LOL"></textarea>
+                    <textarea class="input-code"></textarea>
                 </div>
             </div>
         </section>
 
         <section class="right">
-            <div class="header"></div>
+            <div class="header">
+                <button class="run-btn">Run</button>
+                <a href="https://github.com/ghulam2545/Rubr"><i class="fa-brands fa-github"></i></a>
+            </div>
             <div class="command-body">
                 <div class="textbox">
-                    <textarea placeholder="right side text box, I'm not responsive please fix me. LOL"></textarea>
+                    <textarea class="output-code" disabled>g++ -std=c++20 main.cpp && ./a.out</textarea>
                 </div>
 
             </div>

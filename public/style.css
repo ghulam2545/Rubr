@@ -83,6 +83,27 @@ body {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     overflow: hidden;
 }
+.right .header button {
+    position: relative;
+    float: left;
+    left: 10px;
+    top: 13%;
+    padding: 4px 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.right .header button:hover {
+    background-color: white;
+}
+.right .header i {
+    position: relative;
+    float: right;
+    font-size: 23px;
+    top: 20%;
+    right: 8px;
+    color: black;
+}
 
 @media screen and (max-width: 768px) {
     .main {
